@@ -61,31 +61,34 @@ class _SplashScreenState extends State<SplashScreen>
       animation: _controller,
       builder: (context, child) {
         return Scaffold(
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  _topColorAnimation.value!,
-                  _bottomColorAnimation.value!,
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    _topColorAnimation.value!,
+                    _bottomColorAnimation.value!,
+                  ],
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Hero(
+                    tag: 'logoHero',
+                    child: SvgPicture.asset(
+                      'assets/images/sayora.svg',
+                      height: 100,
+                      width: 100,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Hero(
-                  tag: 'logoHero',
-                  child: SvgPicture.asset(
-                    'assets/images/sayora.svg',
-                    height: 100,
-                    width: 100,
-                  ),
-                ),
-              ],
             ),
           ),
         );

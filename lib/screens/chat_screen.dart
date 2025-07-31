@@ -1,101 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sayoraaa/screens/home_screen.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'home_screen.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  bool _showEmojiPicker = false;
+
+  void _onEmojiSelected(Emoji emoji) {
+    _controller.text += emoji.emoji;
+  }
+
+  void _toggleEmojiPicker() {
+    if (_showEmojiPicker) {
+      setState(() => _showEmojiPicker = false);
+      _focusNode.requestFocus();
+    } else {
+      setState(() => _showEmojiPicker = true);
+      _focusNode.unfocus();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(34, 3, 136, 1),
-              Color.fromRGBO(98, 77, 168, 0.7),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Column(
-          children: [
-            _buildHeader(context),
-            Expanded(
-              child: Stack(
-                children: [
-                 
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(40)),
-                    ),
-                    child: ListView(
-                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 120),
-                      children: [
-                        _messageBubble(
-                          isMe: false,
-                          message:
-                              "Sed Do Eiusmod Tempor Incididunt Ut Labore Et Magna Aliqua.ddddeje hen addd cheyy.",
-                          time: "10:00 AM",
-                          avatar: '👩‍🦰',
-                        ),
-                        _messageBubble(
-                          isMe: true,
-                          message:
-                              "Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit.Consectetur Adipisicing Elit?",
-                          time: "10:01 AM",
-                          avatar: '🧑🏾‍🦱',
-                        ),
-                        _messageBubble(
-                          isMe: true,
-                          message:
-                              "Lorem Ipsum Dolor Sit Consectetur Adipisicing Elit",
-                          time: "10:02 AM",
-                          avatar: '🧑🏾‍🦱',
-                        ),
-                        _messageBubble(
-                          isMe: false,
-                          message: "Ut Enim Ad Minim Veniam..",
-                          time: "10:03 AM",
-                          avatar: '👩‍🦰',
-                        ),
-                        _messageBubble(
-                          isMe: true,
-                          message:
-                              "Lorem Ipsum Adipiscing  Consectetur Adipisicing Elit",
-                          time: "10:04 AM",
-                          avatar: '🧑🏾‍🦱',
-                        ),
-                        _messageBubble(
-                          isMe: false,
-                          message: "Sed Do Eiusmod",
-                          time: "10:05 AM",
-                          avatar: '👩‍🦰',
-                        ),
-                        _messageBubble(
-                          isMe: true,
-                          message: "Ok",
-                          time: "10:06 AM",
-                          avatar: '🧑🏾‍🦱',
-                        ),
-                      ],
-                    ),
-                  ),
-
-                 
-                  Positioned(
-                    bottom: 40,
-                    left: 0,
-                    right: 0,
-                    child: _buildInputField(),
-                  ),
-                ],
-              ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(70, 46, 151, 1),
+                Color.fromRGBO(137, 121, 188, 0.824),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ],
+          ),
+          child: Column(
+            children: [
+              _buildHeader(context),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(40),
+                        ),
+                      ),
+                      child: ListView(
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 120),
+                        children: [
+                          _messageBubble(
+                            isMe: false,
+                            message: "Hello!",
+                            time: "10:00",
+                            avatar: "👩‍🦰",
+                          ),
+                          _messageBubble(
+                            isMe: true,
+                            message: "Hi there! 😊",
+                            time: "10:01",
+                            avatar: "🧑🏾‍🦱",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: _showEmojiPicker ? 270 : 40,
+                      left: 0,
+                      right: 0,
+                      child: _buildInputField(),
+                    ),
+                    if (_showEmojiPicker)
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: SizedBox(
+                          height: 250,
+                          child: EmojiPicker(
+                            onEmojiSelected: (category, emoji) {
+                              _onEmojiSelected(emoji);
+                            },
+                            config: const Config(
+                              emojiViewConfig: EmojiViewConfig(
+                                emojiSizeMax: 32,
+                                backgroundColor: Color(0xFFF2F2F2),
+                                columns: 7,
+                              ),
+                              categoryViewConfig: CategoryViewConfig(
+                                indicatorColor: Colors.deepPurple,
+                                iconColor: Colors.grey,
+                                iconColorSelected: Colors.deepPurple,
+                              ),
+                              skinToneConfig: SkinToneConfig(enabled: true),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -103,20 +121,23 @@ class ChatScreen extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Container(
+      height: 130,
       padding: const EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              );
-            },
+            onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const HomeScreen()),
+            ),
             child: const CircleAvatar(
+              radius: 15,
               backgroundColor: Colors.white,
               child: Icon(
                 Icons.arrow_back,
+                size: 22,
                 color: Color.fromRGBO(108, 65, 250, 1),
               ),
             ),
@@ -127,11 +148,7 @@ class ChatScreen extends StatelessWidget {
             children: [
               Text(
                 'Sayora',
-                style: GoogleFonts.lato(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: GoogleFonts.lato(fontSize: 16, color: Colors.white),
               ),
               Row(
                 children: [
@@ -146,15 +163,24 @@ class ChatScreen extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.notifications_none,
-              color: Color.fromRGBO(108, 65, 250, 1),
-            ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const CircleAvatar(
+                radius: 15,
+                backgroundColor: Colors.white,
+                child: Icon(
+                  size: 22,
+                  Icons.notifications_none,
+                  color: Color.fromRGBO(108, 65, 250, 1),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 10),
-          const Icon(Icons.more_vert, color: Colors.white),
+          const SizedBox(width: 8),
+          const Icon(size: 25, Icons.more_vert, color: Colors.white),
         ],
       ),
     );
@@ -167,8 +193,8 @@ class ChatScreen extends StatelessWidget {
     required String avatar,
   }) {
     final bubbleColor = isMe
-        ? const Color.fromRGBO(162, 154, 234, 0.875)
-        : const Color.fromRGBO(130, 112, 188, 1);
+        ? const Color.fromARGB(130, 127, 121, 149)
+        : const Color.fromRGBO(162, 154, 234, 0.875);
 
     final avatarUrl = avatar == '👩‍🦰'
         ? 'https://tse4.mm.bing.net/th/id/OIP.lvuuyIeh1t0XEQcuipw9iwHaHa?pid=Api&P=0&h=180'
@@ -177,8 +203,9 @@ class ChatScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
-        mainAxisAlignment:
-            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isMe
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!isMe) _buildAvatar(avatarUrl),
@@ -193,13 +220,11 @@ class ChatScreen extends StatelessWidget {
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25),
                         bottomLeft: Radius.circular(25),
-                        bottomRight: Radius.circular(0),
                       )
                     : const BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25),
                         bottomRight: Radius.circular(25),
-                        bottomLeft: Radius.circular(0),
                       ),
               ),
               child: Column(
@@ -207,11 +232,7 @@ class ChatScreen extends StatelessWidget {
                 children: [
                   Text(
                     message,
-                    style: GoogleFonts.lato(
-                      color: Colors.white,
-                      fontSize: 14,
-                      height: 1.4,
-                    ),
+                    style: GoogleFonts.lato(color: Colors.white, fontSize: 14),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -241,9 +262,7 @@ class ChatScreen extends StatelessWidget {
         child: Image.network(
           url,
           fit: BoxFit.cover,
-          width: 36,
-          height: 36,
-          errorBuilder: (context, error, stackTrace) =>
+          errorBuilder: (_, __, ___) =>
               const Icon(Icons.person, color: Colors.white),
         ),
       ),
@@ -266,6 +285,8 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
         child: TextField(
+          controller: _controller,
+          focusNode: _focusNode,
           decoration: InputDecoration(
             hintText: "Type message here...",
             hintStyle: GoogleFonts.lato(color: Colors.grey[600], fontSize: 14),
@@ -276,9 +297,12 @@ class ChatScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               borderSide: BorderSide.none,
             ),
-            prefixIcon: const Icon(
-              Icons.emoji_emotions_outlined,
-              color: Color.fromRGBO(175, 164, 212, 1),
+            prefixIcon: GestureDetector(
+              onTap: _toggleEmojiPicker,
+              child: const Icon(
+                Icons.emoji_emotions_outlined,
+                color: Color.fromRGBO(175, 164, 212, 1),
+              ),
             ),
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,

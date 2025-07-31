@@ -77,199 +77,211 @@ class _LevelScreenState extends State<LevelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF4B22B4), Color(0xFF8E65F3)],
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF4B22B4), Color(0xFF8E65F3)],
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(
-                top: 50,
-                bottom: 20,
-                left: 20,
-                right: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Color(0xFFE0D7F8),
-                    backgroundImage: NetworkImage(
-                      'https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869121.jpg?semt=ais_hybrid',
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 50,
+                  bottom: 20,
+                  left: 20,
+                  right: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Color(0xFFE0D7F8),
+                      backgroundImage: NetworkImage(
+                        'https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869121.jpg?semt=ais_hybrid',
+                      ),
                     ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40),
+                            border: Border.all(
+                              color: Color.fromRGBO(139, 109, 212, 1),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.bolt,
+                                color: Color.fromRGBO(139, 109, 212, 1),
+                                size: 20,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                        "Streak ",
+                        style: GoogleFonts.lato(
+                          color: Colors.deepPurple,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          border: Border.all(
-                            color: Color.fromRGBO(139, 109, 212, 1),
-                            width: 1.5,
+                      ),
+                      Text(
+                        "432",
+                        style: GoogleFonts.lato(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                            ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.bolt,
-                              color: Color.fromRGBO(139, 109, 212, 1),
-                              size: 20,
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              "Streak 432",
-                              style: GoogleFonts.lato(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                        const SizedBox(width: 10),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(4),
+                          child: const Icon(
+                            Icons.notifications_none,
+                            color: Color.fromRGBO(108, 65, 250, 1),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        padding: const EdgeInsets.all(4),
-                        child: const Icon(
-                          Icons.notifications_none,
-                          color: Color.fromRGBO(108, 65, 250, 1),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Learning Levels",
-                                  style: GoogleFonts.lato(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 6,
-                                        offset: Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.star_border,
-                                        size: 18,
-                                        color: Colors.amber,
-                                      ),
-                                      const SizedBox(width: 6),
-                                      Text(
-                                        "0 / 100 Completed",
-                                        style: GoogleFonts.lato(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            _levelOneCard(),
-                            const SizedBox(height: 20),
-                            _lockedLevelCard("Level-2"),
-                            const SizedBox(height: 12),
-                            _lockedLevelCard("Level-3"),
-                            const SizedBox(height: 12),
-                            _lockedLevelCard("Level-4"),
-                            const SizedBox(height: 12),
-                            _lockedLevelCard("Level-5"),
-                            const SizedBox(height: 12),
-                            _lockedLevelCard("Level-6"),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 60,
-                        left: 60,
-                        right: 60,
-                        top: 10,
-                      ),
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12.withOpacity(0.08),
-                              blurRadius: 8,
-                              spreadRadius: 0.5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _buildNavItem('assets/icons/star.svg', 0),
-                            _buildNavItem('assets/icons/home.svg', 1),
-                            _buildNavItem('assets/icons/person.svg', 2),
-                          ],
-                        ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+        
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Learning Levels",
+                                    style: GoogleFonts.lato(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          blurRadius: 6,
+                                          offset: Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.star_border,
+                                          size: 18,
+                                          color: Colors.amber,
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          "0 / 100 Completed",
+                                          style: GoogleFonts.lato(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              _levelOneCard(),
+                              const SizedBox(height: 20),
+                              _lockedLevelCard("Level-2"),
+                              const SizedBox(height: 12),
+                              _lockedLevelCard("Level-3"),
+                              const SizedBox(height: 12),
+                              _lockedLevelCard("Level-4"),
+                              const SizedBox(height: 12),
+                              _lockedLevelCard("Level-5"),
+                              const SizedBox(height: 12),
+                              _lockedLevelCard("Level-6"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 60,
+                          left: 60,
+                          right: 60,
+                          top: 10,
+                        ),
+                        child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12.withOpacity(0.08),
+                                blurRadius: 8,
+                                spreadRadius: 0.5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              _buildNavItem('assets/icons/star.svg', 0),
+                              _buildNavItem('assets/icons/home.svg', 1),
+                              _buildNavItem('assets/icons/person.svg', 2),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

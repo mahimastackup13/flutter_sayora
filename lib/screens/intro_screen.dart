@@ -43,156 +43,159 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFB18BFF),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(208, 195, 252, 1),
-              Color.fromRGBO(120, 80, 200, 1),
-            ],
+      // backgroundColor: const Color(0xFFB18BFF),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(208, 195, 252, 1),
+                Color.fromRGBO(120, 80, 200, 1),
+              ],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 40),
-              Hero(
-                tag: 'logoHero',
-                child: SvgPicture.asset(
-                  'assets/images/sayora.svg',
-                  width: 50,
-                  height: 50,
+          child: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(height: 40),
+                Hero(
+                  tag: 'logoHero',
+                  child: SvgPicture.asset(
+                    'assets/images/sayora.svg',
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: 3,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                  itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              width: 280,
-                              height: 280,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color.fromRGBO(208, 195, 252, 0.3),
-                                    Color.fromRGBO(153, 141, 194, 0.281),
-                                  ],
+                const SizedBox(height: 20),
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: 3,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                width: 280,
+                                height: 280,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color.fromRGBO(208, 195, 252, 0.3),
+                                      Color.fromRGBO(153, 141, 194, 0.281),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Image.asset(images[index], width: 250, height: 240),
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                          child: Text(
-                            titles[index],
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.lato(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
+                              Image.asset(images[index], width: 250, height: 240),
+                            ],
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: Text(
-                            descriptions[index],
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.lato(
-                              fontSize: 13,
-                              color: Colors.white70,
-                              height: 1.5,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 40),
-
-                        if (index == 2)
+                          const SizedBox(height: 30),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40.0,
+                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            child: Text(
+                              titles[index],
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
-                            child: SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: Text(
+                              descriptions[index],
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                fontSize: 13,
+                                color: Colors.white70,
+                                height: 1.5,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+        
+                          if (index == 2)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 40.0,
+                              ),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const LoginScreen(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
+                                    elevation: 0,
                                   ),
-                                  elevation: 0,
-                                ),
-                                child: Text(
-                                  "Let's Get Started",
-                                  style: GoogleFonts.lato(
-                                    color: const Color.fromRGBO(56, 28, 148, 1),
-                                    fontWeight: FontWeight.w500,
+                                  child: Text(
+                                    "Let's Get Started",
+                                    style: GoogleFonts.lato(
+                                      color: const Color.fromRGBO(56, 28, 148, 1),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(3, (index) {
-                  return GestureDetector(
-                    onTap: () => _onDotTapped(index),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: _currentIndex == index
-                            ? Colors.white
-                            : Colors.white38,
-                        borderRadius: BorderRadius.circular(5),
+                const SizedBox(height: 20),
+        
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(3, (index) {
+                    return GestureDetector(
+                      onTap: () => _onDotTapped(index),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: _currentIndex == index
+                              ? Colors.white
+                              : Colors.white38,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
-                    ),
-                  );
-                }),
-              ),
-              const SizedBox(height: 40),
-            ],
+                    );
+                  }),
+                ),
+                const SizedBox(height: 40),
+              ],
+            ),
           ),
         ),
       ),

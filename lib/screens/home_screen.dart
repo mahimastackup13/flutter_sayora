@@ -74,115 +74,118 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              //
-              Color.fromARGB(255, 34, 3, 136),
-              Color.fromARGB(210, 144, 128, 199),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                //
+                Color.fromARGB(255, 34, 3, 136),
+                Color.fromARGB(210, 144, 128, 199),
+              ],
+            ),
+          ),
+        
+          child: Column(
+            children: [
+              // Padding(padding:EdgeInsetsGeometry.all(8)),
+              _buildTopHeader(),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+        
+                  child:
+                      // const SizedBox(height: 4),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 20),
+                                  _statCardRow(),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Let's power up your XP! ",
+                                        style: GoogleFonts.lato(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SvgPicture.asset(
+                                        'assets/icons/star (1).svg',
+        
+                                        color: const Color.fromARGB(
+                                          255,
+                                          118,
+                                          72,
+                                          209,
+                                        ),
+                                        // semanticsLabel: 'medal icon',
+                                        // width: 36,
+                                        // height: 36,
+                                        theme: SvgTheme(
+                                          currentColor: Colors.white,
+                                          fontSize: 50,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  _buildQuestCard(),
+                                  const SizedBox(height: 16),
+                                  _buildLevelCard(),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 60,
+                              left: 60,
+                              right: 60,
+                            ),
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(50),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12.withOpacity(0.08),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  _buildNavItem('assets/icons/medal-star.svg', 0),
+                                  _buildNavItem('assets/icons/home.svg', 1),
+                                  _buildNavItem('assets/icons/person.svg', 2),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                ),
+              ),
             ],
           ),
-        ),
-
-        child: Column(
-          children: [
-            // Padding(padding:EdgeInsetsGeometry.all(8)),
-            _buildTopHeader(),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
-                  ),
-                ),
-
-                child:
-                    // const SizedBox(height: 4),
-                    Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 20),
-                                _statCardRow(),
-                                const SizedBox(height: 16),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Let's power up your XP! ",
-                                      style: GoogleFonts.lato(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SvgPicture.asset(
-                                      'assets/icons/star (1).svg',
-
-                                      color: const Color.fromARGB(
-                                        255,
-                                        118,
-                                        72,
-                                        209,
-                                      ),
-                                      // semanticsLabel: 'medal icon',
-                                      // width: 36,
-                                      // height: 36,
-                                      theme: SvgTheme(
-                                        currentColor: Colors.white,
-                                        fontSize: 50,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 12),
-                                _buildQuestCard(),
-                                const SizedBox(height: 16),
-                                _buildLevelCard(),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 60,
-                            left: 60,
-                            right: 60,
-                          ),
-                          child: Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(50),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12.withOpacity(0.08),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                _buildNavItem('assets/icons/medal-star.svg', 0),
-                                _buildNavItem('assets/icons/home.svg', 1),
-                                _buildNavItem('assets/icons/person.svg', 2),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -626,21 +629,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      "← Previous",
-                      style: GoogleFonts.lato(fontSize: 14, color: Colors.grey),
+                  Icon(Icons.arrow_back, size: 18, color: Colors.grey),
+                  Text(
+                    "Previous",
+                    style: GoogleFonts.lato(fontSize: 15, color: Colors.grey),
+                  ),
+                  const SizedBox(width: 60),
+                  Text(
+                    "Next",
+                    style: GoogleFonts.lato(
+                    fontSize: 15,
+                    color: Color(0xFF4B22B4),
+                    fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(width: 60),
-                    Text(
-                      "Next →",
-                      style: GoogleFonts.lato(
-                        fontSize: 14,
-                        color: Color(0xFF4B22B4),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  ),
+                  Icon(Icons.arrow_forward, size: 18, color: Color(0xFF4B22B4)),
                   ],
                 ),
+                
               ],
             ),
           ),
