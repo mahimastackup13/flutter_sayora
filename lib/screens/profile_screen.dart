@@ -142,6 +142,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Widget _buildBottomNavBar() {
+    return Container(
+      height: 60,
+      margin: const EdgeInsets.symmetric(horizontal: 55, vertical: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(50),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.deepPurple.withOpacity(0.08),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildNavItem('assets/icons/medal-star.svg', 0),
+          _buildNavItem('assets/icons/home-trend-up.svg', 1),
+          _buildNavItem('assets/icons/profile.svg', 2),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +176,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF4B22B4), Color(0xFF8E65F3)],
+              colors: [
+                    Color.fromRGBO(34, 3, 136, 1),
+                    Color.fromRGBO(208, 195, 252, 1),
+                  ],
             ),
           ),
           child: Column(
@@ -416,14 +445,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ],
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      _buildNavItem('assets/icons/star.svg', 0),
-                                      _buildNavItem('assets/icons/home.svg', 1),
-                                      _buildNavItem('assets/icons/person.svg', 2),
-                                    ],
-                                  ),
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                _buildNavItem('assets/icons/medal-star.svg', 0),
+                                _buildNavItem('assets/icons/home-trend-up.svg', 1),
+                                _buildNavItem('assets/icons/profile.svg', 2),
+                              ],
+                              ),
                                 ),
                               ),
                             ],

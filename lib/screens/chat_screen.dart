@@ -82,29 +82,60 @@ class _ChatScreenState extends State<ChatScreen> {
                       right: 0,
                       child: _buildInputField(),
                     ),
+
                     if (_showEmojiPicker)
                       Positioned(
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        child: SizedBox(
+                        child: Container(
                           height: 250,
-                          child: EmojiPicker(
-                            onEmojiSelected: (category, emoji) {
-                              _onEmojiSelected(emoji);
-                            },
-                            config: const Config(
-                              emojiViewConfig: EmojiViewConfig(
-                                emojiSizeMax: 32,
-                                backgroundColor: Color(0xFFF2F2F2),
-                                columns: 7,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF9E6BFC),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 8,
+                                offset: Offset(0, -2),
                               ),
-                              categoryViewConfig: CategoryViewConfig(
-                                indicatorColor: Colors.deepPurple,
-                                iconColor: Colors.grey,
-                                iconColorSelected: Colors.deepPurple,
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                            child: EmojiPicker(
+                              onEmojiSelected: (category, emoji) {
+                                _onEmojiSelected(emoji);
+                              },
+                              config: Config(
+                                emojiViewConfig: const EmojiViewConfig(
+                                  emojiSizeMax: 28,
+                                  columns: 8,
+                                  backgroundColor: Color(0xFF9E6BFC),
+                                ),
+                                categoryViewConfig: const CategoryViewConfig(
+                                  backgroundColor: Color(0xFF9E6BFC),
+                                  iconColor: Colors.white70,
+                                  iconColorSelected: Colors.white,
+                                  indicatorColor: Colors.white,
+                                ),
+                                skinToneConfig: const SkinToneConfig(
+                                  enabled: true,
+                                  dialogBackgroundColor: Color(0xFFB99AF9),
+                                ),
+                                bottomActionBarConfig: BottomActionBarConfig(
+                                  enabled: true,
+                                  backgroundColor: const Color(0xFF8E65F3),
+                                  buttonColor: Colors.white,
+                                  buttonIconColor: Colors.deepPurple,
+                                ),
                               ),
-                              skinToneConfig: SkinToneConfig(enabled: true),
                             ),
                           ),
                         ),

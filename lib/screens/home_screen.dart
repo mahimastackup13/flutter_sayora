@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sayoraaa/screens/chat_screen.dart';
 import 'package:sayoraaa/screens/profile_screen.dart';
 import 'package:sayoraaa/screens/level_screen.dart';
+import 'package:sayoraaa/services/circular_progress.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -160,23 +162,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Container(
                               height: 60,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(50),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12.withOpacity(0.08),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
+                              boxShadow: [
+                                BoxShadow(
+                                color: Colors.black12.withOpacity(0.08),
+                                blurRadius: 8,
+                                offset: const Offset(0, 3),
+                                ),
+                              ],
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  _buildNavItem('assets/icons/medal-star.svg', 0),
-                                  _buildNavItem('assets/icons/home.svg', 1),
-                                  _buildNavItem('assets/icons/person.svg', 2),
-                                ],
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                _buildNavItem('assets/icons/medal-star.svg', 0),
+                                _buildNavItem('assets/icons/home-trend-up.svg', 1),
+                                _buildNavItem('assets/icons/profile.svg', 2),
+                              ],
                               ),
                             ),
                           ),
@@ -456,11 +458,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Align(
+                // alignment: Alignment.topRight,
                 alignment: Alignment.topRight,
+                
                 child: Positioned(
                   top: 20,
                   right: 0,
                   child: Container(
+                  
                     width: 60,
                     height: 60,
                     padding: const EdgeInsets.all(6),
@@ -557,29 +562,16 @@ class _HomeScreenState extends State<HomeScreen> {
         color: const Color(0xFFF1EDFF),
         borderRadius: BorderRadius.circular(20),
       ),
-
-      // const SizedBox(width: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             width: 100,
             height: 150,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                SizedBox(
-                  width: 90,
-                  height: 90,
-                  child: CircularProgressIndicator(
-                    value: 0.2,
-                    strokeWidth: 10,
-                    backgroundColor: const Color(0xFFE0DDF9),
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                      Color(0xFF4B22B4),
-                    ),
-                  ),
-                ),
+                AnimatedCircularProgress(),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -605,9 +597,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-
           const SizedBox(width: 20),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -629,24 +619,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                  Icon(Icons.arrow_back, size: 18, color: Colors.grey),
-                  Text(
-                    "Previous",
-                    style: GoogleFonts.lato(fontSize: 15, color: Colors.grey),
-                  ),
-                  const SizedBox(width: 60),
-                  Text(
-                    "Next",
-                    style: GoogleFonts.lato(
-                    fontSize: 15,
-                    color: Color(0xFF4B22B4),
-                    fontWeight: FontWeight.bold,
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.arrow_back_ios,
+                          size: 14,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "Previous",
+                          style: GoogleFonts.lato(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Icon(Icons.arrow_forward, size: 18, color: Color(0xFF4B22B4)),
+                    const SizedBox(width: 60),
+                    Row(
+                      children: [
+                        Text(
+                          "Next",
+                          style: GoogleFonts.lato(
+                            fontSize: 14,
+                            color: Color(0xFF4B22B4),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 14,
+                          color: Color(0xFF4B22B4),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                
               ],
             ),
           ),

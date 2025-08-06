@@ -1,38 +1,40 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:sayora/screens/login_screen.dart';
+import 'package:sayoraaa/screens/login_screen.dart';
 import 'home_screen.dart';
-import 'signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(126, 109, 182, 1),
+              Color.fromRGBO(90, 55, 203, 1),
+            ],
+          ),
+        ),
+        child: Column(
           children: [
-            
             Container(
+              width: double.infinity,
+              height: 200,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color.fromRGBO(34, 3, 136, 0.844),
-                    Color.fromRGBO(208, 195, 252, 1)
+                    Color.fromRGBO(126, 109, 182, 1),
+                    Color.fromRGBO(90, 55, 203, 1),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
               ),
-            ),
-        
-            Positioned(
-              top: 80,
-              left: 0,
-              right: 0,
               child: Center(
                 child: SvgPicture.asset(
                   'assets/images/sayora.svg',
@@ -41,16 +43,10 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-        
-          
-            Positioned(
-              top: 180,
-              left: 0,
-              right: 0,
-              bottom: 0,
+            Expanded(
               child: Container(
-                margin: const EdgeInsets.only(top: 20),
-                padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.only(
@@ -64,12 +60,12 @@ class LoginScreen extends StatelessWidget {
                       spreadRadius: 0,
                       offset: Offset(0, -30),
                     ),
-                    // BoxShadow(
-                    //   color: Color.fromRGBO(110, 84, 198, 1),
-                    //   // blurRadius: 20,
-                    //   spreadRadius: 10,
-                    //   offset: Offset(0, -15),
-                    // ),
+                    BoxShadow(
+                      color: Color.fromRGBO(110, 84, 198, 1),
+                      // blurRadius: 20,
+                      spreadRadius: 10,
+                      offset: Offset(0, -15),
+                    ),
                     BoxShadow(
                       color: Color.fromRGBO(180, 170, 232, 0.826),
                       // blurRadius: 10,
@@ -77,14 +73,6 @@ class LoginScreen extends StatelessWidget {
                       offset: Offset(0, -20),
                     ),
                   ],
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black.withOpacity(0.08),
-                  //     offset: const Offset(0, -4),
-                  //     // blurRadius: 15,
-                  //     spreadRadius: 6,
-                  //   ),
-                  // ],
                 ),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -98,52 +86,79 @@ class LoginScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Text(
-                                "Welcome Back!",
+                                "Create Account !",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.poppins(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              // const SizedBox(height: 5),
                               Text(
-                                "Log in to pick up where you left off.",
+                                "Sign up to start using Sayora .",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.lato(
                                   fontSize: 14,
                                   color: Colors.black54,
                                 ),
                               ),
-                              const SizedBox(height: 30),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Enter Email Address",
-                                  style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              TextField(
-                                decoration: _inputDecoration("email@example.com"),
-                              ),
-                              const SizedBox(height: 20),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Enter Password",
-                                  style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
+                              const SizedBox(height: 10),
+                              // const SizedBox(height: 20),
+                              Text(
+                                " First Name",
+                                style: GoogleFonts.lato(
+                                  fontSize: 14,
+                                  color: Colors.black,
                                 ),
                               ),
                               const SizedBox(height: 8),
                               TextField(
                                 obscureText: true,
-                                decoration: _inputDecoration("Enter your password"),
+                                decoration: _inputDecoration(
+                                  "Enter your first name",
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                " Last Name",
+                                style: GoogleFonts.lato(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextField(
+                                obscureText: true,
+                                decoration: _inputDecoration(
+                                  "Enter your last name",
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                " Email Address",
+                                style: GoogleFonts.lato(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              TextField(
+                                decoration: _inputDecoration(
+                                  "email@example.com",
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                " Password",
+                                style: GoogleFonts.lato(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextField(
+                                obscureText: true,
+                                decoration: _inputDecoration(
+                                  "Enter your password",
+                                ),
                               ),
                               Align(
                                 alignment: Alignment.center,
@@ -158,14 +173,16 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 14),
+                              const SizedBox(height: 12),
                               Row(
                                 children: [
                                   const Expanded(child: Divider()),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                    ),
                                     child: Text(
-                                      "Or Login with",
+                                      "Or Sign up with",
                                       style: GoogleFonts.lato(fontSize: 12),
                                     ),
                                   ),
@@ -206,7 +223,8 @@ class LoginScreen extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const HomeScreen(),
+                                        builder: (context) =>
+                                            const HomeScreen(),
                                       ),
                                     );
                                   },
@@ -225,7 +243,9 @@ class LoginScreen extends StatelessWidget {
                                           Color.fromARGB(211, 208, 195, 252),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
                                     ),
                                     child: Center(
                                       child: Text(
@@ -244,7 +264,7 @@ class LoginScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Don’t have an account? ",
+                                    "Already have an account? ",
                                     style: GoogleFonts.lato(fontSize: 13),
                                   ),
                                   GestureDetector(
@@ -253,11 +273,11 @@ class LoginScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const SignUpScreen()),
+                                                const LoginScreen()),
                                       );
                                     },
                                     child: Text(
-                                      "Sign Up",
+                                      "Log In",
                                       style: GoogleFonts.lato(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold,
@@ -269,10 +289,9 @@ class LoginScreen extends StatelessWidget {
                                 ],
                               ),
                             ],
-                          )
                           ),
                         ),
-                      
+                      ),
                     );
                   },
                 ),
