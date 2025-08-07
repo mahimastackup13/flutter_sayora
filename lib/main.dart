@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sayoraaa/screens/MainNavigationScreen.dart';
 import 'package:sayoraaa/screens/login_screen.dart';
 import 'package:sayoraaa/screens/level_screen.dart';
 import 'package:sayoraaa/screens/splash_screen.dart';
@@ -18,7 +19,7 @@ class SayoraApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const ChatScreen(),
+      home: const HomeScreen(),
       routes: {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
@@ -27,6 +28,7 @@ class SayoraApp extends StatelessWidget {
         '/level': (context) => const LevelScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/introscreen': (context) => const IntroScreen(),
+        '/mainNavigation': (context) => const MainNavigationScreen(),
       },
     );
   }

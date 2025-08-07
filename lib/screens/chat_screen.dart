@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'home_screen.dart';
+// import 'home_screen.dart';
+import 'MainNavigationScreen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -161,7 +162,7 @@ class _ChatScreenState extends State<ChatScreen> {
           GestureDetector(
             onTap: () => Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (_) => const HomeScreen()),
+              MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
             ),
             child: const CircleAvatar(
               radius: 15,

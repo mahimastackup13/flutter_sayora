@@ -1,110 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sayoraaa/screens/home_screen.dart';
-import 'package:sayoraaa/screens/profile_screen.dart';
 
-class LevelScreen extends StatefulWidget {
+class LevelScreen extends StatelessWidget {
   const LevelScreen({super.key});
-
-  @override
-  State<LevelScreen> createState() => _LevelScreenState();
-}
-
-class _LevelScreenState extends State<LevelScreen> {
-  int selectedIndex = 0;
-
-  void _onNavTap(int index) {
-    if (index == selectedIndex) return;
-
-    setState(() {
-      selectedIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LevelScreen()),
-        );
-        break;
-      case 1:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-        break;
-      case 2:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ProfileScreen()),
-        );
-        break;
-    }
-  }
-
-  Widget _buildNavItem(String assetPath, int index) {
-    bool isSelected = selectedIndex == index;
-
-    return GestureDetector(
-      onTap: () => _onNavTap(index),
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          gradient: isSelected
-              ? const LinearGradient(
-                  colors: [
-                    Color.fromRGBO(34, 3, 136, 1),
-                    Color.fromRGBO(208, 195, 252, 1),
-                  ],
-                )
-              : null,
-          color: isSelected ? null : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
-        child: SvgPicture.asset(
-          assetPath,
-          width: 20,
-          height: 35,
-          color: isSelected
-              ? Colors.white
-              : const Color.fromARGB(153, 100, 86, 194),
-        ),
-      ),
-    );
-  }
-
-  // Overlay navigation bar
-  // Widget buildNavBarOverlay() {
-  //   return Positioned(
-  //     left: 60,
-  //     right: 60,
-  //     bottom: 30,
-  //     child: Container(
-  //       height: 60,
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.circular(50),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.black12.withOpacity(0.08),
-  //             blurRadius: 8,
-  //             spreadRadius: 0.5,
-  //             offset: const Offset(0, 3),
-  //           ),
-  //         ],
-  //       ),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //         children: [
-  //           _buildNavItem('assets/icons/star.svg', 0),
-  //           _buildNavItem('assets/icons/home.svg', 1),
-  //           _buildNavItem('assets/icons/person.svg', 2),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -114,19 +13,18 @@ class _LevelScreenState extends State<LevelScreen> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-               colors: [
-                    Color.fromRGBO(34, 3, 136, 1),
-                    Color.fromRGBO(208, 195, 252, 1),
-                  ],
-              // colors: [Color(0xFF4B22B4), Color(0xFF8E65F3)],
+              colors: [
+                Color.fromRGBO(34, 3, 136, 1),
+                Color.fromRGBO(208, 195, 252, 1),
+              ],
             ),
           ),
           child: Column(
             children: [
               Container(
                 padding: const EdgeInsets.only(
-                  top: 50,
-                  bottom: 20,
+                  top: 20,
+                  bottom: 40,
                   left: 20,
                   right: 20,
                 ),
@@ -158,7 +56,6 @@ class _LevelScreenState extends State<LevelScreen> {
                             ),
                           ),
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
                               const Icon(
                                 Icons.bolt,
@@ -167,21 +64,21 @@ class _LevelScreenState extends State<LevelScreen> {
                               ),
                               const SizedBox(width: 5),
                               Text(
-                        "Streak ",
-                        style: GoogleFonts.lato(
-                          color: Colors.deepPurple,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "432",
-                        style: GoogleFonts.lato(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                                "Streak ",
+                                style: GoogleFonts.lato(
+                                  color: Colors.deepPurple,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "432",
+                                style: GoogleFonts.lato(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -202,7 +99,6 @@ class _LevelScreenState extends State<LevelScreen> {
                   ],
                 ),
               ),
-        
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -213,106 +109,69 @@ class _LevelScreenState extends State<LevelScreen> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SingleChildScrollView(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Learning Levels",
-                                    style: GoogleFonts.lato(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                    ),
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Learning Levels",
+                              style: GoogleFonts.lato(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 6,
+                                    offset: Offset(0, 3),
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black12,
-                                          blurRadius: 6,
-                                          offset: Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.star_border,
-                                          size: 18,
-                                          color: Colors.amber,
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          "0 / 100 Completed",
-                                          style: GoogleFonts.lato(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.star_border,
+                                    size: 18,
+                                    color: Colors.amber,
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    "0 / 100 Completed",
+                                    style: GoogleFonts.lato(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 20),
-                              _levelOneCard(),
-                              const SizedBox(height: 20),
-                              _lockedLevelCard("Level-2"),
-                              const SizedBox(height: 12),
-                              _lockedLevelCard("Level-3"),
-                              const SizedBox(height: 12),
-                              _lockedLevelCard("Level-4"),
-                              const SizedBox(height: 12),
-                              _lockedLevelCard("Level-5"),
-                              const SizedBox(height: 12),
-                              _lockedLevelCard("Level-6"),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 60,
-                          left: 60,
-                          right: 60,
-                          top: 10,
-                        ),
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(50),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12.withOpacity(0.08),
-                                blurRadius: 8,
-                                spreadRadius: 0.5,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                _buildNavItem('assets/icons/medal-star.svg', 0),
-                                _buildNavItem('assets/icons/home-trend-up.svg', 1),
-                                _buildNavItem('assets/icons/profile.svg', 2),
-                              ],
-                              ),
-                        ),
-                      ),
-                    ],
+                        const SizedBox(height: 20),
+                        _levelOneCard(),
+                        const SizedBox(height: 20),
+                        _lockedLevelCard("Level-2"),
+                        const SizedBox(height: 12),
+                        _lockedLevelCard("Level-3"),
+                        const SizedBox(height: 12),
+                        _lockedLevelCard("Level-4"),
+                        const SizedBox(height: 12),
+                        _lockedLevelCard("Level-5"),
+                        const SizedBox(height: 12),
+                        _lockedLevelCard("Level-6"),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -361,11 +220,11 @@ class _LevelScreenState extends State<LevelScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      'assets/icons/star.svg',
+                      'assets/icons/medal-star.svg',
                       width: 20,
                       height: 20,
+                      color: Colors.white,
                     ),
-                    // const SizedBox(height: 8),
                     Text(
                       "Level-1",
                       style: GoogleFonts.lato(
@@ -483,7 +342,6 @@ class _LevelScreenState extends State<LevelScreen> {
                   height: 26,
                   color: Colors.white,
                 ),
-                // const SizedBox(height: 8),
                 Text(
                   level,
                   style: GoogleFonts.lato(
@@ -510,3 +368,4 @@ class _LevelScreenState extends State<LevelScreen> {
     );
   }
 }
+
