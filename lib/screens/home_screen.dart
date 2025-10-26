@@ -33,6 +33,26 @@ class HomeScreen extends StatelessWidget {
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40),
                     ),
+                    boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromRGBO(255, 255, 255, 0.12),
+                      // blurRadius: 25,
+                      spreadRadius: 0,
+                      offset: Offset(0, -30),
+                    ),
+                    // BoxShadow(
+                    //   color: Color.fromRGBO(110, 84, 198, 1),
+                    //   // blurRadius: 20,
+                    //   spreadRadius: 10,
+                    //   offset: Offset(0, -15),
+                    // ),
+                    BoxShadow(
+                      color: Color.fromRGBO(180, 170, 232, 0.826),
+                      // blurRadius: 10,
+                      spreadRadius: 0,
+                      offset: Offset(0, -20),
+                    ),
+                  ],
                   ),
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(20),
@@ -76,11 +96,12 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildTopHeader() {
     return Padding(
-      padding: const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 50),
       child: Stack(
         children: [
           Align(
             alignment: Alignment.topLeft,
+            // alignment: AlignmentDirectional.bottomEnd,
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   radius: 22,
                 ),
-                const SizedBox(height: 8),
+                // const SizedBox(height: 8),
                 Text(
                   "Hey Elizabeth Latte!",
                   style: GoogleFonts.lato(
@@ -101,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 2),
+                // const SizedBox(height: 2/\),
                 Text(
                   "Welcome back! Ready to learn today?",
                   style: GoogleFonts.lato(fontSize: 10, color: Colors.white),
@@ -266,15 +287,18 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Widget _build
+  
   Widget _buildQuestCard(BuildContext context) {
     return Container(
+      width: double.infinity,
+      
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color(0xFFF4F0FE),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
+        
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -322,10 +346,14 @@ class HomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'assets/icons/medal-star.svg',
-                                width: 20,
-                                height: 20,
-                                color: Colors.white,
+                                'assets/icons/mstar.svg',
+                                width: 40,
+                                height: 30,
+                                // color: Colors.white,
+                                theme: SvgTheme(
+                                  currentColor: Colors.white,
+                                  
+                                ),
                               ),
                               Text(
                                 "Level-1",

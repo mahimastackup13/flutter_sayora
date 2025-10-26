@@ -220,9 +220,9 @@ class LevelScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
-                      'assets/icons/medal-star.svg',
-                      width: 20,
-                      height: 20,
+                      'assets/icons/mstar.svg',
+                      width: 40,
+                      height: 30,
                       color: Colors.white,
                     ),
                     Text(
@@ -337,7 +337,7 @@ class LevelScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/star.svg',
+                  'assets/icons/mstar.svg',
                   width: 30,
                   height: 26,
                   color: Colors.white,

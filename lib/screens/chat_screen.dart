@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-// import 'home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:sayoraaa/provider/chat_provider.dart';
 import 'MainNavigationScreen.dart';
+
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -32,121 +34,136 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromRGBO(70, 46, 151, 1),
-                Color.fromRGBO(137, 121, 188, 0.824),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Column(
-            children: [
-              _buildHeader(context),
-              Expanded(
-                child: Stack(
+    return ChangeNotifierProvider(
+      create: (_) => ChatProvider(),
+      child: Consumer<ChatProvider>(
+        builder: (context, chatProvider, _) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: SafeArea(
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromRGBO(70, 46, 151, 1),
+                      Color.fromRGBO(137, 121, 188, 0.824),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Column(
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(40),
-                        ),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 120),
+                    _buildHeader(context),
+                    Expanded(
+                      child: Stack(
                         children: [
-                          _messageBubble(
-                            isMe: false,
-                            message: "Hello!",
-                            time: "10:00",
-                            avatar: "👩‍🦰",
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(40),
+                              ),
+                            ),
+                            child: ListView.builder(
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 16, 16, 120),
+                              itemCount: chatProvider.messages.length,
+                              itemBuilder: (context, index) {
+                                final msg = chatProvider.messages[index];
+                                return _messageBubble(
+                                  isMe: msg['sender'] == "me",
+                                  message: msg['content'],
+                                  time: msg['created_at']
+                                      .toString()
+                                      .substring(11, 16),
+                                  avatar: msg['sender'] == "me"
+                                      ? "🧑🏾‍🦱"
+                                      : "👩‍🦰",
+                                );
+                              },
+                            ),
                           ),
-                          _messageBubble(
-                            isMe: true,
-                            message: "Hi there! 😊",
-                            time: "10:01",
-                            avatar: "🧑🏾‍🦱",
+
+                          /// Input Field
+                          Positioned(
+                            bottom: _showEmojiPicker ? 270 : 40,
+                            left: 0,
+                            right: 0,
+                            child: _buildInputField(chatProvider),
                           ),
+
+                          /// Emoji Picker
+                          if (_showEmojiPicker)
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                height: 250,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFF9E6BFC),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 8,
+                                      offset: Offset(0, -2),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                  child: EmojiPicker(
+                                    onEmojiSelected: (category, emoji) {
+                                      _onEmojiSelected(emoji);
+                                    },
+                                    config: Config(
+                                      emojiViewConfig: const EmojiViewConfig(
+                                        emojiSizeMax: 28,
+                                        columns: 8,
+                                        backgroundColor: Color(0xFF9E6BFC),
+                                      ),
+                                      categoryViewConfig:
+                                          const CategoryViewConfig(
+                                        backgroundColor: Color(0xFF9E6BFC),
+                                        iconColor: Colors.white70,
+                                        iconColorSelected: Colors.white,
+                                        indicatorColor: Colors.white,
+                                      ),
+                                      skinToneConfig: const SkinToneConfig(
+                                        enabled: true,
+                                        dialogBackgroundColor:
+                                            Color(0xFFB99AF9),
+                                      ),
+                                      bottomActionBarConfig:
+                                          BottomActionBarConfig(
+                                        enabled: true,
+                                        backgroundColor:
+                                            const Color(0xFF8E65F3),
+                                        buttonColor: Colors.white,
+                                        buttonIconColor: Colors.deepPurple,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),
-                    Positioned(
-                      bottom: _showEmojiPicker ? 270 : 40,
-                      left: 0,
-                      right: 0,
-                      child: _buildInputField(),
-                    ),
-
-                    if (_showEmojiPicker)
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                          height: 250,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF9E6BFC),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 8,
-                                offset: Offset(0, -2),
-                              ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                            ),
-                            child: EmojiPicker(
-                              onEmojiSelected: (category, emoji) {
-                                _onEmojiSelected(emoji);
-                              },
-                              config: Config(
-                                emojiViewConfig: const EmojiViewConfig(
-                                  emojiSizeMax: 28,
-                                  columns: 8,
-                                  backgroundColor: Color(0xFF9E6BFC),
-                                ),
-                                categoryViewConfig: const CategoryViewConfig(
-                                  backgroundColor: Color(0xFF9E6BFC),
-                                  iconColor: Colors.white70,
-                                  iconColorSelected: Colors.white,
-                                  indicatorColor: Colors.white,
-                                ),
-                                skinToneConfig: const SkinToneConfig(
-                                  enabled: true,
-                                  dialogBackgroundColor: Color(0xFFB99AF9),
-                                ),
-                                bottomActionBarConfig: BottomActionBarConfig(
-                                  enabled: true,
-                                  backgroundColor: const Color(0xFF8E65F3),
-                                  buttonColor: Colors.white,
-                                  buttonIconColor: Colors.deepPurple,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -162,7 +179,9 @@ class _ChatScreenState extends State<ChatScreen> {
           GestureDetector(
             onTap: () => Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
+              MaterialPageRoute(
+                builder: (_) => const MainNavigationScreen(initialIndex: 0),
+              ),
             ),
             child: const CircleAvatar(
               radius: 15,
@@ -195,10 +214,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ],
           ),
           const Spacer(),
-
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const CircleAvatar(
                 radius: 15,
@@ -209,10 +225,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   color: Color.fromRGBO(108, 65, 250, 1),
                 ),
               ),
+              const SizedBox(width: 8),
+              const Icon(size: 25, Icons.more_vert, color: Colors.white),
             ],
           ),
-          const SizedBox(width: 8),
-          const Icon(size: 25, Icons.more_vert, color: Colors.white),
         ],
       ),
     );
@@ -235,9 +251,8 @@ class _ChatScreenState extends State<ChatScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
-        mainAxisAlignment: isMe
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!isMe) _buildAvatar(avatarUrl),
@@ -269,7 +284,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   const SizedBox(height: 4),
                   Text(
                     time,
-                    style: GoogleFonts.lato(color: Colors.white70, fontSize: 8),
+                    style:
+                        GoogleFonts.lato(color: Colors.white70, fontSize: 8),
                   ),
                 ],
               ),
@@ -301,7 +317,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Widget _buildInputField() {
+  Widget _buildInputField(ChatProvider chatProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
@@ -350,17 +366,23 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: Icon(Icons.mic, color: Color(0xFF6B46C1), size: 20),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [Color(0xFF6B46C1), Color(0xFF9F7AEA)],
+                GestureDetector(
+                  onTap: () {
+                    chatProvider.sendMessage(_controller.text);
+                    _controller.clear();
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF6B46C1), Color(0xFF9F7AEA)],
+                      ),
                     ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Icon(Icons.send, color: Colors.white, size: 20),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Icon(Icons.send, color: Colors.white, size: 20),
+                    ),
                   ),
                 ),
               ],

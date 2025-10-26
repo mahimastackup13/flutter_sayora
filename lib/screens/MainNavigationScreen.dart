@@ -1,14 +1,11 @@
-// 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-// Import your screens here
 import 'level_screen.dart';
 import 'home_screen.dart';
 import 'profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  const MainNavigationScreen({super.key, required int initialIndex});
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
@@ -73,7 +70,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Positioned(
             left: 80,
             right: 80,
-            bottom: 40, // Raises the bar slightly above the bottom edge
+            bottom: 40,
             child: Container(
               height: 60,
               // width: 60,
